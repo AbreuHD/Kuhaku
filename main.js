@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require("electron");
+const { app, ipcMain, BrowserWindow } = require("electron");
 
 let appWin;
 
@@ -13,7 +13,7 @@ createWindow = () => {
             nodeIntegration: true
         }
     });
-    
+
     appWin.loadURL(`file://${__dirname}/dist/index.html`);
 
     appWin.setMenu(null);
@@ -32,3 +32,7 @@ app.on("window-all-closed", () => {
       app.quit();
     }
 });
+
+//Para mete discordRCP luego
+ipcMain.on("DiscordInfo", (event) => event.reply("reply", "pong"));
+
