@@ -1,5 +1,9 @@
 const { app, ipcMain, BrowserWindow } = require("electron");
 
+//DRCP
+const clientId = '1033060598914764841';
+const DiscordRPC = require('discord-rpc');
+
 let appWin;
 
 createWindow = () => {
@@ -36,3 +40,28 @@ app.on("window-all-closed", () => {
 //Para mete discordRCP luego
 ipcMain.on("DiscordInfo", (event) => event.reply("reply", "pong"));
 
+//DiscordRCP
+DiscordRPC.register(clientId);
+const rpc = new DiscordRPC.Client({ transport: 'ipc' });
+const startTimestamp = new Date();
+async function setActivity() {
+  rpc.setActivity({
+    details: `Usando la mejor app de peliculas`,
+    state: 'Mirando The Avengers',
+    startTimestamp,
+    largeImageKey: 'kprojectlogobluewithout',
+    largeImageText: 'Usa Kūhaku!',
+    smallImageKey: 'mchearth',
+    smallImageText: 'La Mejor',
+    instance: false,
+    buttons: [{ label: 'Kūhaku', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' },],
+  });
+}
+
+rpc.on('ready', () => {
+  setActivity();
+  setInterval(() => {
+    setActivity();
+  }, 15e3);
+});
+rpc.login({ clientId }).catch(console.error);
