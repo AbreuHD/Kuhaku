@@ -1,1 +1,7 @@
+<<<<<<< Updated upstream
 /* You can add global styles to this file, and also import other style files */
+=======
+>>>>>>> Stashed changes
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
