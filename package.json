@@ -16,6 +16,7 @@
     "@angular/platform-browser": "^14.2.0",
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
+    "discord-rpc": "^4.0.1",
     "electron-store": "^8.1.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
