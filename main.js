@@ -54,7 +54,7 @@ async function setActivity() {
     smallImageKey: 'mchearth',
     smallImageText: 'La Mejor',
     instance: false,
-    buttons: [{ label: 'Kūhaku', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' },],
+    buttons: [{ label: 'Usar Kūhaku', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' },],
   });
 }
 
