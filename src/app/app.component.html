@@ -1,2 +1,20 @@
-<app-nav></app-nav>
-<router-outlet></router-outlet>
+
+<div class="flex">
+    <div class="flex-initial float-left sticky">
+        <app-nav></app-nav>
+    </div> 
+    <div class="flex-auto justify-center" style="display: inline-block;">
+        <router-outlet></router-outlet>
+    </div>
+</div>
+
+
+<!-- <div>
+    <header class="sticky top-0 z-50">
+        <app-nav></app-nav>
+    </header>
+    <main class=relative>
+        <router-outlet></router-outlet>
+    </main>
+    <footer></footer>
+ </div> -->
