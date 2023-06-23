@@ -9,18 +9,18 @@ jobs:
   Gradle:
     runs-on: ubuntu-latest
     steps:
+    - name: checkout code
+      uses: actions/checkout@v2
     - name: setup jdk
       uses: actions/setup-java@v1
       with:
         java-version: 17
     - name: Make Gradle executable
       run: chmod +x ./gradlew
-      working-directory: AbreuHD/KuhakuApp
     - name: Build Release APK
       run: ./gradlew assembleRelease
-      working-directory: AbreuHD/KuhakuApp
     - name: Releasing using Hub
-      uses: kyze8439690/action-release-releaseapk@master
+      uses: doapply/release.apk@main
       env:
        GITHUB_TOKEN: ${{ secrets.TOKEN }}
        APP_FOLDER: app
