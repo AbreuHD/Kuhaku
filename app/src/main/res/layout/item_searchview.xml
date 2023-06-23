@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:id="@+id/ivMovieSearch"
+            android:layout_width="153dp"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvTitleMovieSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"
+                tools:text="Barbie: Poder de Sirena" />
+
+            <TextView
+                android:id="@+id/tvStarsMovieSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="7/10 ⭐" />
+
+            <TextView
+                android:id="@+id/tvDescriptionMovieSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Barbie y sus amigas en una nueva historia bajo el agua donde descubrirán que el verdadero poder proviene del interior." />
+
+            <TextView
+                android:id="@+id/tvDateMovieSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                tools:text="Estreno: 2021-03-08"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

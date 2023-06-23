@@ -16,10 +16,10 @@ class API {
 //        val call = getRetrofit().create(APICalls::class.java).getAllMovies()
 //        return call
 //    }
-    suspend fun getMovieList(): List<MovieList>? {
+    suspend fun getMovieList(name: String): List<MovieList>? {
         return withContext(Dispatchers.IO) {
             try {
-                val response = getRetrofit().create(APICalls::class.java).getAllMovies().execute()
+                val response = getRetrofit().create(APICalls::class.java).getAllMovies(name).execute()
                 if (response.isSuccessful) {
                     response.body()
                 } else {
@@ -32,7 +32,22 @@ class API {
             }
         }
     }
-
+    suspend fun getMovieByTMBDID(id: Long): MovieList? {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = getRetrofit().create(APICalls::class.java).getMovieByTMBDID(id).execute()
+                if (response.isSuccessful) {
+                    response.body()
+                } else {
+                    Log.e("nuc", "Request failed with code ${response.code()}")
+                    null
+                }
+            } catch (e: IOException) {
+                Log.e("nuc", "Error occurred: ${e}")
+                null
+            }
+        }
+    }
 
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
