@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".View.detail.DetailActivity">
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
@@ -18,6 +28,7 @@
 
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:gravity="center_horizontal"
@@ -36,8 +47,8 @@
             android:textStyle="bold"
             tools:text="Avengers" />
 
-
         <Button
+            android:id="@+id/btnPlay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/playBTN" />
@@ -45,10 +56,13 @@
         <TextView
             android:id="@+id/tvDescription"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:layout_height="match_parent"
             android:textStyle="bold"
             tools:text="Avengers" />
+
+
+
     </LinearLayout>
 
 

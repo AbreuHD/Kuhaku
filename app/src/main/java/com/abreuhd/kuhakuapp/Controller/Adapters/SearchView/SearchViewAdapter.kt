@@ -4,15 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.abreuhd.kuhakuapp.Controller.ViewHolders.SearchView.MovieListViewHolder
-import com.abreuhd.kuhakuapp.Model.Movies.MovieList
+import com.abreuhd.kuhakuapp.Model.Movies.MoviePreview
 import com.abreuhd.kuhakuapp.R
 
 class SearchViewAdapter(
-    var movieList: List<MovieList> = emptyList(),
+    var movieList: List<MoviePreview> = emptyList(),
     private val onItemSelected: (Long) -> Unit
 ) : RecyclerView.Adapter<MovieListViewHolder>() {
 
-    fun onUpdateList(movieList: List<MovieList>) {
+    fun onUpdateList(movieList: List<MoviePreview>) {
         this.movieList = movieList
         notifyDataSetChanged()
     }

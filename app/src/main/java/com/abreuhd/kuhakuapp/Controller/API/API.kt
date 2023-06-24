@@ -1,7 +1,8 @@
 package com.abreuhd.kuhakuapp.Controller.API
 
 import android.util.Log
-import com.abreuhd.kuhakuapp.Model.Movies.MovieList
+import com.abreuhd.kuhakuapp.Model.Movies.MovieDetail
+import com.abreuhd.kuhakuapp.Model.Movies.MoviePreview
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
@@ -16,7 +17,7 @@ class API {
 //        val call = getRetrofit().create(APICalls::class.java).getAllMovies()
 //        return call
 //    }
-    suspend fun getMovieList(name: String): List<MovieList>? {
+    suspend fun getMovieList(name: String): List<MoviePreview>? {
         return withContext(Dispatchers.IO) {
             try {
                 val response = getRetrofit().create(APICalls::class.java).getAllMovies(name).execute()
@@ -32,7 +33,7 @@ class API {
             }
         }
     }
-    suspend fun getMovieByTMBDID(id: Long): MovieList? {
+    suspend fun getMovieByTMBDID(id: Long): MovieDetail? {
         return withContext(Dispatchers.IO) {
             try {
                 val response = getRetrofit().create(APICalls::class.java).getMovieByTMBDID(id).execute()

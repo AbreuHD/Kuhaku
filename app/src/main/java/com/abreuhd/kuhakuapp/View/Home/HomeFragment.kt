@@ -90,11 +90,6 @@ class HomeFragment : Fragment() {
     }
 
     fun getSnackBar(id: Long){
-//        val snackbar = Snackbar.make(requireView(), "El id es ${id}", Snackbar.LENGTH_LONG)
-//        snackbar.setAction("Botón", View.OnClickListener {
-//            snackbar.dismiss() // Oculta el Snackbar al hacer clic en el botón
-//        })
-//        snackbar.show()
         val intent = Intent(requireContext(), DetailActivity::class.java)
         intent.putExtra(ID_MOVIE, id)
         startActivity(intent)
