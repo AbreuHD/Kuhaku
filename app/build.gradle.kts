@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.abreuhd.kuhaku"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.abreuhd.kuhaku"
         minSdk = 21
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -51,6 +51,7 @@ android {
 
 dependencies {
 
+    implementation("androidx.navigation:navigation-compose:2.7.1")
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
     implementation("androidx.activity:activity-compose:1.7.0")
