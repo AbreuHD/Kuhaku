@@ -4,6 +4,7 @@ import android.util.Log
 import com.abreuhd.kuhakuapp.Model.Servers.VideoServerTypeDataClass
 import it.skrape.core.htmlDocument
 import it.skrape.fetcher.BrowserFetcher
+import it.skrape.fetcher.HttpFetcher
 import it.skrape.fetcher.response
 import it.skrape.fetcher.skrape
 import kotlinx.coroutines.Dispatchers
@@ -20,7 +21,7 @@ class CuevanaGetMovieLinks(uri: String) {
     var servers: List<VideoServerTypeDataClass> = emptyList()
 
     init {
-        val scrapedData = skrape(BrowserFetcher) {
+        val scrapedData = skrape(HttpFetcher) {
             request {
                 url = uri
             }
@@ -61,6 +62,8 @@ class CuevanaGetMovieLinks(uri: String) {
     private fun ServerType(id: String): String {
         val data = id.toInt()
         return when (data) {
+            101007 -> "Slmaxed"
+            101009 -> "StreamSB"
             55625 -> "Google"
             54846 -> "Streamtape"
             28190 -> "Fembed"

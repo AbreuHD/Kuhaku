@@ -10,12 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.abreuhd.kuhakuapp.Controller.API.API
+import com.abreuhd.kuhakuapp.Controller.API.Kuhaku.API
 import com.abreuhd.kuhakuapp.Controller.Adapters.SearchView.SearchViewAdapter
 import com.abreuhd.kuhakuapp.View.detail.DetailActivity
 import com.abreuhd.kuhakuapp.View.detail.DetailActivity.Companion.ID_MOVIE
 import com.abreuhd.kuhakuapp.databinding.FragmentHomeBinding
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

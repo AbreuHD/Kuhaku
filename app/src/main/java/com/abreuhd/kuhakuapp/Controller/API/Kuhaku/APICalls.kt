@@ -1,4 +1,4 @@
-package com.abreuhd.kuhakuapp.Controller.API
+package com.abreuhd.kuhakuapp.Controller.API.Kuhaku
 
 import com.abreuhd.kuhakuapp.Model.Movies.MovieDetail
 import com.abreuhd.kuhakuapp.Model.Movies.MoviePreview

@@ -1,5 +1,4 @@
 package com.abreuhd.kuhakuapp.View.detail
-
 import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,8 +6,9 @@ import android.util.Log
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
-import com.abreuhd.kuhakuapp.Controller.API.API
+import com.abreuhd.kuhakuapp.Controller.API.Kuhaku.API
 import com.abreuhd.kuhakuapp.Controller.Scraping.Scrap
+import com.abreuhd.kuhakuapp.Controller.Scraping.VideoSource.WebPages.Cuevana.CuevanaSkipFilters
 import com.abreuhd.kuhakuapp.Model.Movies.MovieDetail
 import com.abreuhd.kuhakuapp.Model.Servers.VideoServerTypeDataClass
 import com.abreuhd.kuhakuapp.databinding.ActivityDetailBinding
@@ -47,8 +47,7 @@ class DetailActivity : AppCompatActivity() {
                     binding.progressBar.isVisible = true
                     CoroutineScope(Dispatchers.IO).launch {
                         val data = Scrap().ScrapSelect(data.movieLinks[which].link)
-                        runOnUiThread{
-
+                        runOnUiThread {
                             serverSelect(data)
                         }
                     }
@@ -87,12 +86,20 @@ class DetailActivity : AppCompatActivity() {
         binding.progressBar.isVisible = false
         binding.btnPlay.text = "Reproducir"
         binding.btnPlay.isEnabled = true
-        val serverVideoList = svList.map { "${it.Language} | ${it.Type}"  }
+        val serverVideoList = svList.map { "${it.Language} | ${it.Type}" }
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, serverVideoList)
         val builder = AlertDialog.Builder(this)
             .setTitle("Selecciona el servidor")
             .setAdapter(adapter) { dialog: DialogInterface, which: Int ->
-                showSnackbar(svList[which].Link)
+
+                CoroutineScope(Dispatchers.IO).launch {
+                    val directLink = CuevanaSkipFilters().getCuevanaVideoSource(svList[which].Link, svList[which].Type)
+                    CoroutineScope(Dispatchers.Main).launch {
+                        if (directLink != null) {
+                            showSnackbar(directLink)
+                        }
+                    }
+                }
             }
             .setNegativeButton("Cancel") { dialog: DialogInterface, _ ->
                 dialog.dismiss()

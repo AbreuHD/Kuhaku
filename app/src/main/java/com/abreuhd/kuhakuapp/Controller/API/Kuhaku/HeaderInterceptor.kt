@@ -1,4 +1,4 @@
-package com.abreuhd.kuhakuapp.Controller.API
+package com.abreuhd.kuhakuapp.Controller.API.Kuhaku
 
 import okhttp3.Interceptor
 import okhttp3.Response
