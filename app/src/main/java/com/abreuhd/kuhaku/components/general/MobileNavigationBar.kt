@@ -31,6 +31,7 @@ import com.abreuhd.kuhaku.data.NavigationBar.MobileNavigationBarDataClass
 import com.abreuhd.kuhaku.routes.AppNavigation
 
 @OptIn(ExperimentalMaterial3Api::class)
+@Preview
 @Composable
 fun navigationBarWithScaffold(){
     Scaffold (
