@@ -80,4 +80,10 @@ dependencies {
     //LiveData
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.compose.runtime:runtime-livedata:1.6.1")
+
+    //Icon
+    implementation("androidx.compose.material:material:1.6.1")
+
+
+    implementation("androidx.compose.foundation:foundation:1.6.1")
 }

@@ -10,23 +10,27 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.doublebyte.kuhaku.ui.components.general.itemSearchBar
+import com.doublebyte.kuhaku.ui.components.navigation.itemSearchBar
 import com.doublebyte.kuhaku.ui.components.general.itemSlider
+import com.doublebyte.kuhaku.ui.components.navigation.MobileNavigationBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 
 @Composable
-fun HomeScreen(navController: NavController, padding: PaddingValues) {
-    Scaffold ( topBar = { itemSearchBar() } ) {padding ->
+fun HomeScreen(navController: NavController) {
+    Scaffold ( topBar = { itemSearchBar() }, bottomBar = { MobileNavigationBar() }) {padding ->
         Body(navController = navController, padding)
     }
-
 }
+
+
 @Composable
 fun Body(navController: NavController, padding: PaddingValues){
-    LazyColumn(modifier = Modifier.fillMaxHeight().padding(top = 80.dp, bottom = 80.dp)){
+    LazyColumn(modifier = Modifier
+        .fillMaxHeight()
+        .padding(top = 80.dp, bottom = 80.dp)){
         items(10){
-            itemSlider()
+            itemSlider("Accion", "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/xRMZikjAHNFebD1FLRqgDZeGV4a.jpg", false, navController)
         }
     }
 }

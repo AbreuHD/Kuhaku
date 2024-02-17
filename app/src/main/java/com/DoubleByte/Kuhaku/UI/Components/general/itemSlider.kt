@@ -13,12 +13,13 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 @Composable
-fun itemSlider() {
+fun itemSlider(txt : String, photo: String, isPerson: Boolean = false, navController: NavController) {
     //Box(modifier = Modifier.fillMaxSize()) {
         Text(
-            text = "Movies",
+            text = txt,
             modifier = Modifier.padding(start = 16.dp),
             fontFamily = FontFamily.SansSerif,
             fontWeight = FontWeight.Bold,
@@ -35,7 +36,7 @@ fun itemSlider() {
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 items(20) {
-                    ItemPosterCard("https://www.themoviedb.org/t/p/w600_and_h900_bestv2/xRMZikjAHNFebD1FLRqgDZeGV4a.jpg")
+                    ItemPosterCard(photo, isPerson, navController)
                 }
             }
         //}
