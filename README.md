@@ -4,7 +4,7 @@
 It is an application that makes use of the [KūhakuAPI](https://github.com/AbreuHD/KuhakuAPI) and WebScraping within it will give you access to the best catalog of movies and series.
 
 ## Pages Added
-- Working on [Cuevana.AI](https://w4.cuevana3.ai)
+- Working on [Cuevana3.ch](cuevana3.ch)
 
 ## Tech Stack
 [WebApi](https://github.com/AbreuHD/KuhakuAPI): C#, .Net, Solid, Identity, Handlers, Swagger
