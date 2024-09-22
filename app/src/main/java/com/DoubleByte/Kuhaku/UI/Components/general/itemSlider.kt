@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
 @Composable
-fun itemSlider(txt : String, photo: String, isPerson: Boolean = false, navController: NavController) {
+fun itemSlider(txt : String, photos: List<String>, isPerson: Boolean = false, navController: NavController) {
     //Box(modifier = Modifier.fillMaxSize()) {
         Text(
             text = txt,
@@ -35,8 +35,8 @@ fun itemSlider(txt : String, photo: String, isPerson: Boolean = false, navContro
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                items(20) {
-                    ItemPosterCard(photo, isPerson, navController)
+                items(photos.size) { i ->
+                    ItemPosterCard(photos[i], isPerson, navController)
                 }
             }
         //}
