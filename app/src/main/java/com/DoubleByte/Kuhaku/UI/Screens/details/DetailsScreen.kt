@@ -1,8 +1,8 @@
 package com.doublebyte.kuhaku.ui.screens.details
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -11,72 +11,91 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
+import com.doublebyte.kuhaku.core.network.kuhakuApi.KuhakuRepository
+import com.doublebyte.kuhaku.data.kuhakuDTO.GenericResponseDto
+import com.doublebyte.kuhaku.data.kuhakuDTO.MoviePreviewDto
 import com.doublebyte.kuhaku.ui.components.general.ItemPosterMovieCard
-import com.doublebyte.kuhaku.ui.components.general.itemSlider
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@HiltViewModel
+class DetailsScreenViewModel @Inject constructor(
+    private val kuhakuRepository: KuhakuRepository
+) : ViewModel() {
 
-@Preview
-@Composable
-fun DetailsScreenPreview() {
-    val navController = rememberNavController()
-    DetailsScreen(navController = navController)
+    // Flow to hold the movie data
+    private val _detailScreenInfo = MutableStateFlow<GenericResponseDto<MoviePreviewDto>?>(null)
+    val movieDetail: StateFlow<GenericResponseDto<MoviePreviewDto>?> = _detailScreenInfo
+
+    // Function to fetch movies
+    fun getDetailScreen(id: String) {
+        viewModelScope.launch {
+            Log.i("Details gg", "Inicio")
+            val movies = kuhakuRepository.getMovieInfo(id)
+            Log.i("Details gg", "a")
+            _detailScreenInfo.value = movies
+            Log.i("Details gg", "b")
+            Log.i("Details gg", movies.toString())
+        }
+    }
 }
-
-
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun DetailsScreen(navController: NavController) {
+fun DetailsScreen(navController: NavController, id : String, viewModel: DetailsScreenViewModel = hiltViewModel()) {
     Scaffold(){
-        Body(navController)
+        Body(navController, viewModel,id)
     }
 }
 
 @Composable
-fun Body(navController: NavController) {
+fun Body(navController: NavController, viewModel: DetailsScreenViewModel, id: String) {
+    viewModel.getDetailScreen(id)
+    val details by viewModel.movieDetail.collectAsState()
+    Log.i("Details gg", "End")
+
+
     LazyColumn(){
         item {
             Box(
                 Modifier
                     .fillMaxWidth()
                     .height(330.dp)){
-                ImageBackdropTop()
+                ImageBackdropTop(details)
                 Box(
                     Modifier
                         .align(Alignment.Center)
                         .height(250.dp)
                         .width(150.dp)){
-                    ItemPosterMovieCard("https://image.tmdb.org/t/p/w600_and_h900_bestv2/ugX4WZJO3jEvTOerctAWJLinujo.jpg")
+                    ItemPosterMovieCard("https://image.tmdb.org/t/p/w600_and_h900_bestv2/${details?.payload?.poster_path}")
                 }
 
                 Box(Modifier.align(Alignment.BottomCenter)){
@@ -99,8 +118,8 @@ fun Body(navController: NavController) {
                 Spacer(modifier = Modifier.defaultMinSize(10.dp))
                 Text(modifier = Modifier
                     .padding(horizontal = 16.dp)
-                    .padding(bottom = 10.dp), text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", fontSize = 15.sp)
-                Divider(Modifier.padding(10.dp))
+                    .padding(bottom = 10.dp), text = "${details?.payload?.overview}", fontSize = 15.sp)
+                HorizontalDivider(Modifier.padding(10.dp))
                 //itemSlider("Actores", "https://media.themoviedb.org/t/p/w300_and_h450_bestv2/im9SAqJPZKEbVZGmjXuLI4O7RvM.jpg", true, navController)
             }
         }
@@ -108,11 +127,11 @@ fun Body(navController: NavController) {
 }
 
 @Composable
-fun ImageBackdropTop() {
+fun ImageBackdropTop(details: GenericResponseDto<MoviePreviewDto>?) {
     Image(
         painter =
         rememberAsyncImagePainter(
-            model = "https://image.tmdb.org/t/p/original/gHLs7Fy3DzLmLsD4lmfqL55KGcl.jpg",
+            model = "https://image.tmdb.org/t/p/w600_and_h900_bestv2/${details?.payload?.backdrop_path}",
         ),
         contentDescription = "ItemIMG",
         modifier = Modifier

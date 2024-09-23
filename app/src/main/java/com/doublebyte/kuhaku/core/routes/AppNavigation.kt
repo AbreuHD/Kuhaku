@@ -16,8 +16,8 @@ fun AppNavigation(){
         composable(route = AppScreens.HomeScreen.route){
             HomeScreen(navController)
         }
-        composable(route = AppScreens.DetailScreen.route){
-            DetailsScreen(navController)
+        composable(route = "${AppScreens.DetailScreen.route}/{id}"){
+            DetailsScreen(navController = navController, it.arguments?.getString("id") ?: "")
         }
     }
 

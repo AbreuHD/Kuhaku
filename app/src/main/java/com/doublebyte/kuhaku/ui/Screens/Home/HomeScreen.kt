@@ -1,6 +1,4 @@
 package com.doublebyte.kuhaku.ui.screens.home
-
-import android.graphics.Movie
 import android.util.Log
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -27,12 +25,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import okhttp3.internal.wait
-import java.lang.System.console
 import javax.inject.Inject
-import kotlin.math.log
 
-@OptIn(ExperimentalMaterial3Api::class)
 
 @HiltViewModel
 class HomeScreenViewModel @Inject constructor(
@@ -75,7 +69,7 @@ fun Body(navController: NavController, padding: PaddingValues, viewModel: HomeSc
                 Log.i("Movies", "Success:" + movies?.payload!![i].movies.map { it?.poster_path})
                 itemSlider(
                     movies!!.payload[i].genre.name,
-                    movies!!.payload[i].movies.map { "https://image.tmdb.org/t/p/w600_and_h900_bestv2/${it?.poster_path}"},
+                    movies!!.payload[i].movies,
                     false,
                     navController
                 )

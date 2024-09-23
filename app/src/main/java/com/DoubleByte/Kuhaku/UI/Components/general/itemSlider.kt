@@ -14,9 +14,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.doublebyte.kuhaku.data.kuhakuDTO.MoviePreviewDto
 
 @Composable
-fun itemSlider(txt : String, photos: List<String>, isPerson: Boolean = false, navController: NavController) {
+fun itemSlider(txt: String, movieList: List<MoviePreviewDto?>, isPerson: Boolean = false, navController: NavController) {
     //Box(modifier = Modifier.fillMaxSize()) {
         Text(
             text = txt,
@@ -35,8 +36,8 @@ fun itemSlider(txt : String, photos: List<String>, isPerson: Boolean = false, na
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                items(photos.size) { i ->
-                    ItemPosterCard(photos[i], isPerson, navController)
+                items(movieList.size) { i ->
+                    ItemPosterCard(movieList[i]!!.poster_path, isPerson, navController, movieList[i]?.id.toString())
                 }
             }
         //}
