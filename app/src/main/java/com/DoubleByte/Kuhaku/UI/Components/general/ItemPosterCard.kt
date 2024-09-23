@@ -18,13 +18,13 @@ import com.doublebyte.kuhaku.core.routes.AppNavigation
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ItemPosterCard(img: String, isPerson: Boolean = false, navController: NavController) {
+fun ItemPosterCard(img: String, isPerson: Boolean = false, navController: NavController, id: String) {
     Card(
         onClick = {
             if(isPerson)
             // TODO: Add Person Details Screen
             else
-                navController.navigate(AppScreens.DetailScreen.route)
+                navController.navigate("${AppScreens.DetailScreen.route}/$id")
         },
         modifier = Modifier.size(width = 120.dp, height = 180.dp),
         shape = RoundedCornerShape(12.dp)
@@ -36,7 +36,7 @@ fun ItemPosterCard(img: String, isPerson: Boolean = false, navController: NavCon
             Image(
                 painter =
                 rememberAsyncImagePainter(
-                    model = img,
+                    model = "https://image.tmdb.org/t/p/w600_and_h900_bestv2/${img}",
                 ),
                 contentDescription = "ItemIMG",
                 modifier = Modifier.fillMaxSize(),
